@@ -25,6 +25,11 @@ match n ((id,f):idfs)
 -----------------------------------------------------------------------------------------
 --Where the magic happens
 
-fList = []
+fList = [
+    ("+",plus)
+   ,("-",minus)]
 
-nameList = []
+nameList = ["+","-"]
+
+plus ((Num x):(Num y):[])=Num (x+y)
+minus ((Num x):(Num y):[])=Num (x-y)
