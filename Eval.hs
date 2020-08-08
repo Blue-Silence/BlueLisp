@@ -1,4 +1,4 @@
-module EVAL(
+module Eval(
     eval
    ,appENV
 )where
