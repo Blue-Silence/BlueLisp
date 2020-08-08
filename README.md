@@ -16,8 +16,12 @@ A toy language for practice.
     1.惰性求值
     2.闭包
 
+内置函数:
+    +,-,*,/
+    
 未实现功能:
     1.Bool类型
+    2.if内置函数
     2.GC
     3.复合数据类型
     4.IO

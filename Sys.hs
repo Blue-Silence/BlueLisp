@@ -27,9 +27,14 @@ match n ((id,f):idfs)
 
 fList = [
     ("+",plus)
-   ,("-",minus)]
+   ,("-",minus)
+   ,("*",mul)
+   ,("/",division)
+   ]
 
-nameList = ["+","-"]
+nameList = ["+","-","*","/"]
 
 plus ((Num x):(Num y):[])=Num (x+y)
 minus ((Num x):(Num y):[])=Num (x-y)
+mul ((Num x):(Num y):[])=Num (x*y)
+division ((Num x):(Num y):[])=Num (div x y)
