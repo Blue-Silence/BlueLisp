@@ -24,3 +24,13 @@ A toy language for practice.
     
 使用说明:
     调用Interface模块中的interpreter,输入量为String,输出量为Val(定义于Type模块中)
+
+Example:
+    (
+        (foo x y)
+        (def foo (Lambda a b -> (- (+ a b) z)))
+        (def z 3)
+        (def x 6)
+        (def y 2)
+    )
+   => Val 5
