@@ -1,7 +1,6 @@
 module EVAL(
     eval
    ,appENV
-   ,funApply --for test
 )where
 
 import Type
