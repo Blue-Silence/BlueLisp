@@ -1,6 +1,7 @@
 module Lexer_help(
     chunken
    ,split
+   ,dropLast
 )where
 
 chunken :: [String]->[[String]] --将[String]根据括号对称分成[[String]]
@@ -20,3 +21,7 @@ splitH _ (re,[])=((reverse re),[])
 splitH n (re,(x:xs))
     |n==x = ((reverse re),xs)
     |otherwise = splitH n ((x:re),xs)
+
+
+dropLast (x:[])=[]
+dropLast (x:xs)=x:(dropLast xs)
