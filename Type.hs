@@ -12,13 +12,17 @@ data Term = Terms Term [Term] ENV
            |Termf Val [Term] ENV 
            |TermVal Val 
            |TermVar Not ENV 
-            deriving Show
+            deriving (Show,Eq)
 
 
 data Val = Num Int
-          |Op Not
-          |Lambda [Not] Term 
-            deriving Show
+          |Op Int
+          |Lambda [Not] Term
+          |Boolean Bool
+          |Character Char
+          |Cons Val Val
+          |Null
+            deriving (Show,Eq)
 
 
 type Not = [Char]
@@ -31,4 +35,4 @@ emptyENV=[[]]
 
 data Def = Def Not Term 
           |ClosedDef Not Term
-            deriving Show
+            deriving (Show,Eq)

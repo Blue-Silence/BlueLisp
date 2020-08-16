@@ -3,10 +3,11 @@ module Interface(interpreter)where
 import Type
 import Lexer
 import Eval 
+import Std
 
 interpreter :: String->Val
 
-interpreter=eval . term_gen . words . preProcess
+interpreter=eval . (appENV std_env) . term_gen . words . preProcess
 
 
 
