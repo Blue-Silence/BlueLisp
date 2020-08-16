@@ -18,6 +18,8 @@ A toy language for practice.
     3.自动柯里化
 
 内置函数:
+
+
     eq? 
         exp: (eq? Null 1) =>False
     + 
