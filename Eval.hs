@@ -101,8 +101,6 @@ getCurrentENV x = case x of
 
 
 
-
-
 ----------------------------------------------------------------------------------------------------
 --外部调用部分 
 fList :: [(Int,[Term]->Term)]
@@ -151,7 +149,7 @@ strToCons (x:xs)=Cons (Character x) (strToCons xs)
 consToStr Null=[]
 consToStr (Cons (Character x) xs)=x:(consToStr xs)
 ----------------------------------------------------------------------------------
---Really dark magic(控制求值顺序)
+--Really dark magic(控制求值顺序)(与ENV实现强耦合)
 
 seq_imp (x:y:[])=TermVal (pseq (eval x) (eval y))
 
