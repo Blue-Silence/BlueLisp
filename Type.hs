@@ -20,6 +20,8 @@ data Val = Num Int
           |Lambda [Not] Term
           |Boolean Bool
           |Character Char
+          |Cons Val Val
+          |Null
             deriving Show
 
 

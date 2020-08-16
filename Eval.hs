@@ -87,6 +87,7 @@ fList = [
    ,(5,if_imp)
    ,(6,seq_imp)
    ,(7,seq_def_imp)
+   ,(8,cons_imp)
    ]
 
 plus (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv+yv))
@@ -96,6 +97,7 @@ division (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (di
 if_imp (x:y:z:[])=let xv=eval x in case xv of 
                                     (Boolean True)->y 
                                     _->z
+cons_imp (x:y:[])=let xv=eval x in let yv=eval y in TermVal (Cons xv yv)
 
 ----------------------------------------------------------------------------------
 --Really dark magic(控制求值顺序)

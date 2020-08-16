@@ -11,4 +11,5 @@ std_env=
     ,(ClosedDef "if" (TermVal (Lambda ["x","y","z"] (Termf (Op 5) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV) , (TermVar "z" emptyENV)] emptyENV))))
     ,(ClosedDef "seq!" (TermVal (Lambda ["x","y"] (Termf (Op 6) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
     ,(ClosedDef "seq_def!" (TermVal (Lambda ["x"] (Termf (Op 7) [(TermVar "x" emptyENV)] emptyENV))))
+    ,(ClosedDef "cons" (TermVal (Lambda ["x","y"] (Termf (Op 8) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
     ]]

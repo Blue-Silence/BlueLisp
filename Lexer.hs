@@ -26,7 +26,9 @@ createENV :: [[String]]->ENV
 
 constrtSingle ("True") = TermVal (Boolean True) 
 constrtSingle ("False") = TermVal (Boolean False)
-constrtSingle ('\'':x:'\'':[])=TermVal (Character x)
+
+constrtSingle ('\'':x:'\'':[]) = TermVal (Character x)
+constrtSingle "Null" = (TermVal Null)
 
 constrtSingle a@(x:xs)
     |isNumber x = TermVal (Num (read a))
