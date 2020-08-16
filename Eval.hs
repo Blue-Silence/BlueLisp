@@ -1,6 +1,7 @@
 module Eval(
     eval
    ,appENV
+   ,strToCons
 )where
 
 import Type
@@ -163,4 +164,3 @@ seq_seq_def_imp_h (d:ds) env@(e:es) = case d of
 
 
 
-                                

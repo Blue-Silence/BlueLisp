@@ -29,6 +29,7 @@ constrtSingle ("False") = TermVal (Boolean False)
 
 constrtSingle ('\'':x:'\'':[]) = TermVal (Character x)
 constrtSingle "Null" = (TermVal Null)
+constrtSingle ('\"':xs)=TermVal ((strToCons . dropLast) xs)
 
 constrtSingle a@(x:xs)
     |isNumber x = TermVal (Num (read a))
