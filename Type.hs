@@ -19,6 +19,7 @@ data Val = Num Int
           |Op Int
           |Lambda [Not] Term
           |Boolean Bool
+          |Character Char
             deriving Show
 
 

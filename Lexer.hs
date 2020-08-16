@@ -26,10 +26,10 @@ createENV :: [[String]]->ENV
 
 constrtSingle ("True") = TermVal (Boolean True) 
 constrtSingle ("False") = TermVal (Boolean False)
+constrtSingle ('\'':x:'\'':[])=TermVal (Character x)
 
 constrtSingle a@(x:xs)
     |isNumber x = TermVal (Num (read a))
---    |isSyscall a = TermVal (Op (constrtNot a))
     |otherwise = TermVar (constrtNot a) emptyENV
 
 constrtLambda s = let (binder,t)=split "->" s

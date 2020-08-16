@@ -97,8 +97,10 @@ if_imp (x:y:z:[])=let xv=eval x in case xv of
                                     (Boolean True)->y 
                                     _->z
 
+----------------------------------------------------------------------------------
+--Really dark magic(控制求值顺序)
 
-seq_imp (x:y:[])=TermVal (pseq (eval x) (eval y)) --Really dark magic(控制求值顺序)
+seq_imp (x:y:[])=TermVal (pseq (eval x) (eval y))
 
 seq_def_imp (x:[]) = let (t,ce,es)=getCurrentENV x in appENV (seq_def_imp_h ce ([]:ce:es)) t  
 
