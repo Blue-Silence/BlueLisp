@@ -3,7 +3,6 @@ module Lexer
 
 import Type
 import Eval
-import Sys
 import Lexer_help
 import Data.Char
 
@@ -27,7 +26,7 @@ createENV :: [[String]]->ENV
 
 constrtSingle a@(x:xs)
     |isNumber x = TermVal (Num (read a))
-    |isSyscall a = TermVal (Op (constrtNot a))
+--    |isSyscall a = TermVal (Op (constrtNot a))
     |otherwise = TermVar (constrtNot a) emptyENV
 
 constrtLambda s = let (binder,t)=split "->" s

@@ -4,7 +4,6 @@ module Eval(
 )where
 
 import Type
-import Sys 
 
 
 eval :: Term->Val
@@ -14,8 +13,8 @@ eval (TermVar var env) = eval (getDef env var)
 eval (Terms t1 ts env) = let t1_val=(eval . (appENV env)) t1 
                             in eval (Termf t1_val ts env)
 eval (Termf v ts env) = case v of
-                        (Op _) -> let ts_val=map (eval . (appENV env)) ts 
-                                    in syscall v ts_val
+                        (Op n) -> let ts'=map ((appENV env)) ts 
+                                    in eval (syscall n ts')
                         (Lambda _ _)->let ts_envd=map (appENV env) ts 
                                         in eval (funApply v ts_envd)
 
@@ -38,7 +37,16 @@ mapOnENV f t = case t of
     (TermVal v)->case v of 
                     (Lambda ns term)->TermVal (Lambda ns (mapOnENV f term))
                     _->TermVal v
-                
+
+
+syscall :: Int->[Term]->Term
+
+syscall n x = (match n fList) x
+
+match n ((id,f):idfs)
+    |n==id = f 
+    |otherwise = match n idfs
+
 ------------------------------------------------------------------------------------------
 --与 ENV 实现相关
 
@@ -60,3 +68,18 @@ findMatch n (d:ds)
     |otherwise=findMatch n ds 
         where getN (Def n _)=n
               getN (ClosedDef n _)=n
+
+----------------------------------------------------------------------------------------------------
+--外部调用部分 
+
+fList = [
+    (1,plus)
+   ,(2,minus)
+   ,(3,mul)
+   ,(4,division)
+   ]
+
+plus (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv+yv))
+minus (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv-yv))
+mul (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv*yv))
+division (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (div xv yv))
