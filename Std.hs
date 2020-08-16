@@ -15,4 +15,6 @@ std_env=
     ,(ClosedDef "cons" (TermVal (Lambda ["x","y"] (Termf (Op 8) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
     ,(ClosedDef "car" (TermVal (Lambda ["x"] (Termf (Op 9) [(TermVar "x" emptyENV)] emptyENV))))
     ,(ClosedDef "cdr" (TermVal (Lambda ["x"] (Termf (Op 10) [(TermVar "x" emptyENV)] emptyENV))))
+    ,(ClosedDef "toStr" (TermVal (Lambda ["x"] (Termf (Op 11) [(TermVar "x" emptyENV)] emptyENV))))
+    ,(ClosedDef "printStr" (TermVal (Lambda ["x"] (Termf (Op 12) [(TermVar "x" emptyENV)] emptyENV))))
     ]]

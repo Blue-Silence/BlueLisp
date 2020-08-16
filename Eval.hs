@@ -5,6 +5,7 @@ module Eval(
 
 import Type
 import GHC.Conc
+import System.IO.Unsafe
 
 eval :: Term->Val
 
@@ -112,12 +113,18 @@ fList = [
    ,(2,minus)
    ,(3,mul)
    ,(4,division)
+
    ,(5,if_imp)
+
    ,(6,seq_imp)
    ,(7,seq_def_imp)
+
    ,(8,cons_imp)
    ,(9,car_imp)
    ,(10,cdr_imp)
+
+   ,(11,toStr_imp)
+   ,(12,printStr_imp)
    ]
 
 eq_imp (x:y:[])=let xv=eval x in let yv=eval y in TermVal (Boolean ((==) xv yv))
@@ -132,6 +139,17 @@ cons_imp (x:y:[])=let xv=eval x in let yv=eval y in TermVal (Cons xv yv)
 car_imp (x:[])=let (Cons xv _)=eval x in TermVal xv 
 cdr_imp (x:[])=let (Cons _ yv)=eval x in TermVal yv
 
+toStr_imp (x:[])=let v=eval x in case v of
+                                (Num n)->(TermVal ((strToCons . show) n))
+                                (Character c)->(TermVal ((Cons (Character c) Null)))
+                                _->(TermVal ((strToCons . show) v))
+printStr_imp (x:[])=let v=eval x in pseq (unsafeDupablePerformIO ((putStrLn . consToStr) v)) (TermVal Null)
+
+strToCons []=Null 
+strToCons (x:xs)=Cons (Character x) (strToCons xs)
+
+consToStr Null=[]
+consToStr (Cons (Character x) xs)=x:(consToStr xs)
 ----------------------------------------------------------------------------------
 --Really dark magic(控制求值顺序)
 
