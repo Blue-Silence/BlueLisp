@@ -18,3 +18,8 @@ std_env=
     ,(ClosedDef "toStr" (TermVal (Lambda ["x"] (Termf (Op 11) [(TermVar "x" emptyENV)] emptyENV))))
     ,(ClosedDef "printStr" (TermVal (Lambda ["x"] (Termf (Op 12) [(TermVar "x" emptyENV)] emptyENV))))
     ]]
+
+
+
+
+

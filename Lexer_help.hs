@@ -25,3 +25,11 @@ splitH n (re,(x:xs))
 
 dropLast (x:[])=[]
 dropLast (x:xs)=x:(dropLast xs)
+
+
+
+
+
+
+
+

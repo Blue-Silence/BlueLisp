@@ -158,3 +158,9 @@ seq_def_imp (x:[]) = let (t,ce,es)=getCurrentENV x in appENV (seq_def_imp_h ce (
 seq_def_imp_h [] env=let dropSecond (x:_:xs)=x:xs in dropSecond env
 seq_seq_def_imp_h (d:ds) env@(e:es) = case d of 
                                 (Def x t)->let v=(eval . (appENV env)) t in pseq v (seq_def_imp_h ds (((ClosedDef x (TermVal v)):e):es))
+
+
+
+
+
+                                

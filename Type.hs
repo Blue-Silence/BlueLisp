@@ -36,3 +36,10 @@ emptyENV=[[]]
 data Def = Def Not Term 
           |ClosedDef Not Term
             deriving (Show,Eq)
+
+
+
+
+
+
+

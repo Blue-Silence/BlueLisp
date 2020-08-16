@@ -44,3 +44,12 @@ createENV x = [map createDef x] --与ENV实现有关
 createDef ("(":"def":n:xs)=Def (constrtNot n) ((term_gen . dropLast) xs) 
 
 constrtNot x = x --与Not实现有关
+
+
+
+
+
+
+
+
+
