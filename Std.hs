@@ -4,7 +4,8 @@ import Type
 
 std_env=
     [[
-    (ClosedDef "+" (TermVal (Lambda ["x","y"] (Termf (Op 1) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
+    (ClosedDef "eq?" (TermVal (Lambda ["x","y"] (Termf (Op 0) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
+    ,(ClosedDef "+" (TermVal (Lambda ["x","y"] (Termf (Op 1) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
     ,(ClosedDef "-" (TermVal (Lambda ["x","y"] (Termf (Op 2) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
     ,(ClosedDef "*" (TermVal (Lambda ["x","y"] (Termf (Op 3) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
     ,(ClosedDef "/" (TermVal (Lambda ["x","y"] (Termf (Op 4) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
@@ -12,4 +13,6 @@ std_env=
     ,(ClosedDef "seq!" (TermVal (Lambda ["x","y"] (Termf (Op 6) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
     ,(ClosedDef "seq_def!" (TermVal (Lambda ["x"] (Termf (Op 7) [(TermVar "x" emptyENV)] emptyENV))))
     ,(ClosedDef "cons" (TermVal (Lambda ["x","y"] (Termf (Op 8) [(TermVar "x" emptyENV) , (TermVar "y" emptyENV)] emptyENV))))
+    ,(ClosedDef "car" (TermVal (Lambda ["x"] (Termf (Op 9) [(TermVar "x" emptyENV)] emptyENV))))
+    ,(ClosedDef "cdr" (TermVal (Lambda ["x"] (Termf (Op 10) [(TermVar "x" emptyENV)] emptyENV))))
     ]]

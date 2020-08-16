@@ -75,12 +75,40 @@ getCurrentENV x = case x of
                 (TermVar var (env:es))->((TermVar var emptyENV),env,es) 
                 x->(x,[],emptyENV)
 
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------
+
+-------此部分为系统调用实现
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ----------------------------------------------------------------------------------------------------
 --外部调用部分 
 fList :: [(Int,[Term]->Term)]
 
 fList = [
-    (1,plus)
+    (0,eq_imp)
+   ,(1,plus)
    ,(2,minus)
    ,(3,mul)
    ,(4,division)
@@ -88,8 +116,11 @@ fList = [
    ,(6,seq_imp)
    ,(7,seq_def_imp)
    ,(8,cons_imp)
+   ,(9,car_imp)
+   ,(10,cdr_imp)
    ]
 
+eq_imp (x:y:[])=let xv=eval x in let yv=eval y in TermVal (Boolean ((==) xv yv))
 plus (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv+yv))
 minus (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv-yv))
 mul (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv*yv))
@@ -98,6 +129,8 @@ if_imp (x:y:z:[])=let xv=eval x in case xv of
                                     (Boolean True)->y 
                                     _->z
 cons_imp (x:y:[])=let xv=eval x in let yv=eval y in TermVal (Cons xv yv)
+car_imp (x:[])=let (Cons xv _)=eval x in TermVal xv 
+cdr_imp (x:[])=let (Cons _ yv)=eval x in TermVal yv
 
 ----------------------------------------------------------------------------------
 --Really dark magic(控制求值顺序)
