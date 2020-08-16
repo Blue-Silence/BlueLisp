@@ -4,7 +4,7 @@ module Eval(
 )where
 
 import Type
-
+import GHC.Conc
 
 eval :: Term->Val
 
@@ -69,8 +69,15 @@ findMatch n (d:ds)
         where getN (Def n _)=n
               getN (ClosedDef n _)=n
 
+getCurrentENV x = case x of 
+                (Terms t ts (env:es))->((Terms t ts emptyENV),env,es) 
+                (Termf t ts (env:es))->((Termf t ts emptyENV),env,es) 
+                (TermVar var (env:es))->((TermVar var emptyENV),env,es) 
+                x->(x,[],emptyENV)
+
 ----------------------------------------------------------------------------------------------------
 --外部调用部分 
+fList :: [(Int,[Term]->Term)]
 
 fList = [
     (1,plus)
@@ -78,6 +85,8 @@ fList = [
    ,(3,mul)
    ,(4,division)
    ,(5,if_imp)
+   ,(6,seq_imp)
+   ,(7,seq_def_imp)
    ]
 
 plus (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv+yv))
@@ -87,3 +96,12 @@ division (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (di
 if_imp (x:y:z:[])=let xv=eval x in case xv of 
                                     (Boolean True)->y 
                                     _->z
+
+
+seq_imp (x:y:[])=TermVal (pseq (eval x) (eval y)) --Really dark magic(控制求值顺序)
+
+seq_def_imp (x:[]) = let (t,ce,es)=getCurrentENV x in appENV (seq_def_imp_h ce ([]:ce:es)) t  
+
+seq_def_imp_h [] env=let dropSecond (x:_:xs)=x:xs in dropSecond env
+seq_seq_def_imp_h (d:ds) env@(e:es) = case d of 
+                                (Def x t)->let v=(eval . (appENV env)) t in pseq v (seq_def_imp_h ds (((ClosedDef x (TermVal v)):e):es))
