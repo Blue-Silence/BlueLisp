@@ -77,9 +77,13 @@ fList = [
    ,(2,minus)
    ,(3,mul)
    ,(4,division)
+   ,(5,if_imp)
    ]
 
 plus (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv+yv))
 minus (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv-yv))
 mul (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (xv*yv))
 division (x:y:[])=let (Num xv)=eval x in let (Num yv)=eval y in TermVal (Num (div xv yv))
+if_imp (x:y:z:[])=let xv=eval x in case xv of 
+                                    (Boolean True)->y 
+                                    _->z

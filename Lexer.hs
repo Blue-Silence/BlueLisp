@@ -24,6 +24,9 @@ constrtSingle :: String->Term  --构造常量/标识符
 constrtLambda :: [String]->Term --构造Lambda表达式
 createENV :: [[String]]->ENV 
 
+constrtSingle ("True") = TermVal (Boolean True) 
+constrtSingle ("False") = TermVal (Boolean False)
+
 constrtSingle a@(x:xs)
     |isNumber x = TermVal (Num (read a))
 --    |isSyscall a = TermVal (Op (constrtNot a))

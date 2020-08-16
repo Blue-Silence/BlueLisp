@@ -17,7 +17,8 @@ data Term = Terms Term [Term] ENV
 
 data Val = Num Int
           |Op Int
-          |Lambda [Not] Term 
+          |Lambda [Not] Term
+          |Boolean Bool
             deriving Show
 
 
